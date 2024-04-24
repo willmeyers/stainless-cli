@@ -6,6 +6,10 @@ This is a tiny command-line utility for interacting with [Stainless API](https:/
 
 ## Installing
 
+### Download Binary
+
+[Download your platform's binary here](https://github.com/willmeyers/stainless-cli/releases).
+
 ### Building from Source
 
 Simply run (for Linux and MacOS):
