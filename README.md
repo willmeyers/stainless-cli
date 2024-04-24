@@ -18,7 +18,7 @@ Simply run (for Linux and MacOS):
 git clone https://github.com/willmeyers/stainless-cli
 cd stainless-cli
 make build
-mv build/stainless-$MY_PLATFORM /usr/local/bin/stainless-cli; stainless-cli -version
+mv build/stainless-$MY_PLATFORM /usr/local/bin/stainless-cli
 ```
 
 ## Get Started
