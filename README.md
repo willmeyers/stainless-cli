@@ -18,8 +18,10 @@ Simply run (for Linux and MacOS):
 git clone https://github.com/willmeyers/stainless-cli
 cd stainless-cli
 make build
-mv build/stainless-[darwin|linux|windows] /usr/local/bin/stainless-cli
+mv build/stainless-[darwin|linux] /usr/local/bin/stainless-cli
 ```
+
+Windows binaries are available as well.
 
 ## Get Started
 
