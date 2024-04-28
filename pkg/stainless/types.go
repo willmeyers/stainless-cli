@@ -2,12 +2,7 @@ package stainless
 
 import "time"
 
-type GenerateResponse struct {
-	ProjectName string `json:"projectName"`
-	Generate    bool   `json:"generated"`
-	NewSha      string `json:"newSha"`
-	HasMerged   bool   `json:"hasMerged"`
-}
+// Builds
 
 type Build struct {
 	ID          int        `json:"id"`
@@ -31,13 +26,20 @@ type ListBuildsResponse struct {
 	HasPreviousPage bool    `json:"hasPreviousPage"`
 }
 
-type RetrieveSdkBuildResponse struct {
+type GetBuildStatusResponse struct {
 	ID                  uint64    `json:"id"`
 	Status              string    `json:"status"`
 	DiagnosticsFileURL  string    `json:"diagnosticsFileURL"`
 	StartedGeneratingAt time.Time `json:"startedGeneratingAt"`
 	EndedAt             time.Time `json:"endedAt"`
 	HasGenerated        bool      `json:"hasGenerated"`
+}
+
+// Orgs
+
+type OrgItem struct {
+	Name        string `json:"name"`
+	DisplayName string `json:"displayName"`
 }
 
 type ListOrgsResponse struct {
@@ -48,9 +50,11 @@ type ListOrgsResponse struct {
 	Items           []OrgItem `json:"items"`
 }
 
-type OrgItem struct {
-	Name        string `json:"name"`
-	DisplayName string `json:"displayName"`
+// Projects
+
+type ProjectItem struct {
+	Name string `json:"name"`
+	Org  string `json:"org"`
 }
 
 type ListProjectsResponse struct {
@@ -61,10 +65,34 @@ type ListProjectsResponse struct {
 	Items           []ProjectItem `json:"items"`
 }
 
-type ProjectItem struct {
-	Name string `json:"name"`
-	Org  string `json:"org"`
+// API Keys
+
+type ListApiKeysResponse []struct {
+	ID            string    `json:"id"`
+	Key           string    `json:"key"`
+	Name          string    `json:"name"`
+	CreatedAt     time.Time `json:"createdAt"`
+	UpdatedAt     time.Time `json:"updatedAt"`
+	DeletedAt     time.Time `json:"deletedAt"`
+	CreatedByUser struct {
+		Name     string `json:"name"`
+		Email    string `json:"email"`
+		ImageURL string `json:"imageURL"`
+	} `json:"createdByUser"`
 }
+
+// Members
+
+type ListMembersResponse []struct {
+	UserID   string `json:"userID"`
+	InviteID string `json:"inviteID"`
+	Name     string `json:"name"`
+	Email    string `json:"email"`
+	ImageURL string `json:"imageURL"`
+	Role     string `json:"role"`
+}
+
+// SDKs
 
 type SdkListItem struct {
 	ID                    int    `json:"id"`
@@ -85,6 +113,15 @@ type SdkListItem struct {
 	} `json:"customCodeInformation"`
 }
 
-type ListSdkResponse struct {
+type ListSdksResponse struct {
 	Items []SdkListItem `json:"items"`
+}
+
+// Generate
+
+type GenerateResponse struct {
+	ProjectName string `json:"projectName"`
+	Generate    bool   `json:"generated"`
+	NewSha      string `json:"newSha"`
+	HasMerged   bool   `json:"hasMerged"`
 }
