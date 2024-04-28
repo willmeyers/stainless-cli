@@ -2,7 +2,7 @@
 
 This is a tiny command-line utility for interacting with [Stainless API](https://www.stainlessapi.com/).
 
-> This project is in no way affiated Stainless API. Use at your own risk.
+> This project is in no way affiated Stainless API.
 
 ## Installing
 
@@ -18,12 +18,12 @@ Simply run (for Linux and MacOS):
 git clone https://github.com/willmeyers/stainless-cli
 cd stainless-cli
 make build
-mv build/stainless-$MY_PLATFORM /usr/local/bin/stainless-cli
+mv build/stainless-[darwin|linux|windows] /usr/local/bin/stainless-cli
 ```
 
 ## Get Started
 
-Stainless does not have a complete API accessible via API keys. We must login, obtain the necessary session tokens, and export them into our environment before we can start using the CLI.
+Stainless does not have a complete API accessible via API keys. We must login, obtain the necessary session tokens.
 
 To get started, run:
 
@@ -31,9 +31,9 @@ To get started, run:
 stainless-cli login
 ```
 
-Complete the OAuth flow as you normally would and if successful, copy/paste and export the environment variable listed on completion.
+Complete the OAuth flow as you normally would.
 
-After logging in, you can check your status by listing your organizations with:
+After logging in, you can check your authentication status by listing your organizations with:
 
 ```bash
 stainless-cli orgs
@@ -56,31 +56,24 @@ You'll need a few items on hand to generate an SDK:
 From there you generate your project's SDKs with:
 
 ```bash
-stainless-cli generate --openapi ./openapi.yml --config ./stainless.yml
-```
-
-You can also optionally target specific languages with:
-
-```bash
-stainless-cli generate --openapi ./openapi.yml --config ./stainless.yml --language python
+stainless-cli generate all --openapi ./openapi.yml --config ./stainless.yml
 ```
 
 Finally, if an output directory (`--out-dir`) is given, stainless-cli will perform a git clone/pull automatically once the generation is complete.
 
-**An important note: Please ensure you have accepted the invitation to contribute to your SDK's repo. Otherwise you will not be able to clone or pull from.**
-
-## Usage
-
+```bash
+stainless-cli generate all --openapi ./openapi.yml --config ./stainless.yml --out-dir ./sdks
 ```
-Usage: stainless [command]
 
-Commands:
-  login     Log in to your account
-  orgs      List organizations
-  projects  List projects
-  generate  Generate SDKs
-  builds    List builds
-  sdks      List SDKs and SDK build status
-  version   Show the version of the CLI
-  help      Show this help message
+After each SDK generates, its GitHub repository is cloned or updated in a respective directory inside the specified out directory.
+
+## Security
+
+For your security, please consider running 
+
+```bash
+stainless-cli logout
 ```
+
+to remove any cached credentials saved on your filesystem. The credentials cached are session tokens and, if comprimised, can be used
+to login to your Stainless API account anywhere.
